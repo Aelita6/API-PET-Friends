@@ -1,18 +1,19 @@
 from api import PetFriends
-from settings import valid_email, valid_password
+from settings import valid_email, invalid_email, valid_password
 import os
 
 
 pf = PetFriends()
 
 
-def test_get_api_key_for_invalid_user(email=453654, password=valid_password):
+def test_get_api_key_for_invalid_user(email=invalid_email, password=valid_password):
     """ Проверяем что запрос api ключа возвращает статус 403 так как email не действительный"""
 
     status, result = pf.get_api_key(email, password)
 
-    assert status == 403
-    assert result == 403
+    assert status == 400
+    assert result == 400
+
 
 def test_get_api_key_for_invalid_user(email=valid_email, password=valid_password):
     """ Проверяем что запрос api ключа возвращает статус 200 и в результате содержится слово key"""
@@ -31,8 +32,8 @@ def test_add_new_pet_with_valid_data(name='Циля', animal_type='дворте�
     _, auth_key = pf.get_api_key(valid_email, valid_password)
     status, result = pf.add_new_pet(auth_key, name, animal_type, age, pet_photo)
 
-    assert status == 403
-    assert result == 403
+    assert status == 400
+    assert result == 400
 
 
 def test_add_new_pet_with_valid_data(name='Циля', animal_type='двортерьер',
@@ -63,8 +64,8 @@ def test_list_my_pets_negative(filter="my_pets", email=453654, password=valid_pa
     _, auth_key = pf.get_api_key(valid_email, valid_password)
     _, my_pets = pf.get_list_of_pets(auth_key, "my_pets")
 
-    assert status == 403
-    assert result == 403
+    assert status == 400
+    assert result == 400
 
 
 
@@ -122,6 +123,6 @@ def test_successful_delete_self_pet():
 
     _, my_pets = pf.get_list_of_pets(auth_key, "my_pets")
 
-    assert status == 403
-    assert result == 403
+    assert status == 400
+    assert result == 400
 
