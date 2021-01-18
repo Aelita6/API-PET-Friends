@@ -7,7 +7,7 @@ pf = PetFriends()
 
 
 def test_get_api_key_for_invalid_user(email=invalid_email, password=valid_password):
-    """ Проверяем что запрос api ключа возвращает статус 403 так как email не действительный"""
+    """ Проверяем что запрос api ключа возвращает статус 400 так как email не действительный"""
 
     status, result = pf.get_api_key(email, password)
 
