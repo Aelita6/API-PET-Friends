@@ -1,2 +1,5 @@
 valid_email = "perevaa7@mail.ru"
+
+invalid_email = "453654"
+
 valid_password = "123456"
